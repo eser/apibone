@@ -1,6 +1,6 @@
 class TestModule {
     run(argv, formatter) {
-        formatter.log(argv);
+        formatter.json(argv);
     }
 }
 

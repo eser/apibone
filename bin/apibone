@@ -3,6 +3,7 @@
 'use strict';
 
 const updateNotifier = require('update-notifier'),
+    cliFormatter = require('../formatters/CliFormatter.js'),
     pkg = require('../package.json'),
     apibone = require('../');
 
@@ -20,4 +21,5 @@ process.on('exit', function () {
 updateNotifier({ pkg: pkg })
     .notify({ defer: false });
 
+apibone.setFormatter(new cliFormatter());
 apibone.run(process.argv.slice(2));

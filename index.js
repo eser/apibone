@@ -1,8 +1,10 @@
-const yargsParser = require('yargs-parser'),
-    formatter = require('./formatter.js');
+const yargsParser = require('yargs-parser');
 
 class ApiBone {
     constructor() {
+    }
+
+    setFormatter(formatter) {
         this.formatter = formatter;
     }
 
@@ -15,6 +17,7 @@ class ApiBone {
             moduleInstance = new moduleType();
 
         moduleInstance.run(argv, this.formatter);
+        this.formatter.end();
     }
 }
 
