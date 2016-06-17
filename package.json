@@ -1,0 +1,47 @@
+{
+  "name": "apibone",
+  "version": "0.0.2",
+  "description": "Enter description.",
+  "keywords": [
+    "api"
+  ],
+  "engines": {
+    "node": ">=5.2.0"
+  },
+  "author": {
+    "name": "Eser Ozvataf",
+    "url": "http://eser.ozvataf.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/eserozvataf/apibone/issues",
+    "email": "eser@ozvataf.com"
+  },
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Eser Ozvataf",
+      "email": "eser@ozvataf.com",
+      "url": "http://eser.ozvataf.com/"
+    }
+  ],
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eserozvataf/apibone.git"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "update-notifier": "^0.7.0",
+    "yargs-parser": "^2.4.0"
+  },
+  "scripts": {
+    "start": "./bin/apibone",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "bin"
+  ],
+  "bin": {
+    "apibone": "./bin/apibone"
+  }
+}
