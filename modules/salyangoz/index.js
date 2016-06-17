@@ -3,19 +3,25 @@ const fetch = require('node-fetch'),
     emoji = require('node-emoji');
 
 class SalyangozModule {
-    run(argv) {
+    run(argv, formatter) {
         fetch('https://salyangoz.me/recent.json')
             .then((res) => res.json())
             .then((json) => {
-                json.posts.forEach((post, index) => {
-                    const username = emoji.get(':bust_in_silhouette:') + ' ' + post.user.user_name;
-                    const time     = emoji.get(':clock1:') + ' ' + post.updated_at + ' ago';
-                    const views    = emoji.get(':dart:') + '  ' + post.visit_count + ' views';
+                let count = 0;
 
-                    console.log(colors.grey.bold(post.title));
-                    console.log(colors.cyan.underline(post.url));
-                    console.log(`${username}  ${time} ${views}\n`);
-                });
+                for(let post of json.posts) {
+                    if (argv.limit !== undefined && count++ >= argv.limit) {
+                        break;
+                    }
+
+                    const username = `${emoji.get(':bust_in_silhouette:')} ${post.user.user_name}`,
+                        time     = `${emoji.get(':clock1:')} ${post.updated_at} ago`,
+                        views    = `${emoji.get(':dart:')}  ${post.visit_count} views`;
+
+                    formatter.log(colors.grey.bold(post.title));
+                    formatter.log(colors.cyan.underline(post.url));
+                    formatter.log(`${username}  ${time} ${views}\n`);
+                }
             });
     }
 }

@@ -1,6 +1,6 @@
 class TestModule {
-    run(argv) {
-        console.log(argv);
+    run(argv, formatter) {
+        formatter.log(argv);
     }
 }
 
