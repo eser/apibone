@@ -9,7 +9,6 @@ class ApiBone {
         const moduleType = require(`./modules/${cmd}/`),
             moduleInstance = new moduleType();
 
-        console.log(cmd);
         moduleInstance.run(argv);
     }
 }
