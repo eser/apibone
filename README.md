@@ -13,8 +13,8 @@ module [arguments ...] [--parameter value ...]
 For example, to execute rates module in order to query 5 USD's TRY value:
 
 ```sh
-module rates usd try --amount 5 # cli example
-wget http://example.com/rates/usd/try?amount=5 # web example
+$ apibone module rates usd try --amount 5 # cli example
+http://example.com/rates/usd/try?amount=5 # web example
 ```
 
 **module:** module name which will be called. (e.g.: **rates**)   
@@ -23,35 +23,39 @@ wget http://example.com/rates/usd/try?amount=5 # web example
 
 ### Installation
 ```sh
-npm install -g apibone
-mv config.sample.js config.js
+$ npm install -g apibone
+$ mv config.sample.js config.js # rename config.sample.js to config.js
 ```
 
 ### CLI Usage
 ```sh
-apibone module [arguments]
+$ apibone module [arguments]
 
 # Examples:
-apibone salyangoz --limit 2
-apibone salyangoz --limit 2 --format json
-apibone rates usd try
-apibone rates usd try --amount 5
-apibone weather izmir
-apibone test anyCommand --anyParam=anyValue --anyOptionalParam
+$ apibone modules
+$ apibone salyangoz --limit 2
+$ apibone salyangoz --limit 2 --format json
+$ apibone rates usd try
+$ apibone rates usd try --amount 5
+$ apibone weather izmir
+$ apibone test anyCommand --anyParam=anyValue --anyOptionalParam
 ```
 
 ### REPL Usage
 ```sh
-apibone
+$ apibone
+
+apibone> modules
 apibone> weather izmir
 apibone> /q
 ```
 
 ### Web Usage
 ```sh
-npm start
+$ npm start
 
 # Example:
+http://localhost:3000/modules
 http://localhost:3000/salyangoz?limit=2
 http://localhost:3000/rates/usd/try?amount=5
 http://localhost:3000/weather/izmir
