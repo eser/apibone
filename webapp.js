@@ -1,7 +1,10 @@
 const express = require('express'),
-    webFormatter = require('./formatters/WebFormatter.js'),
-    apibone = require('./'),
+    WebPlatform = require('./platforms/web/WebPlatform.js'),
+    ApiBone = require('./'),
     app = express();
+
+const platform = new WebPlatform(),
+    apiBone = new ApiBone(platform);
 
 app.get('/*', (req, res) => {
     let args = req.params[0].replace('/', ' ');
@@ -10,8 +13,11 @@ app.get('/*', (req, res) => {
         args += ` --${qsKey}=${req.query[qsKey]}`;
     }
 
-    apibone.setFormatter(new webFormatter(res));
-    apibone.run(args);
+    apiBone.execute({
+        request: req,
+        response: res,
+        args: args
+    });
 });
 
 app.listen(3000, function () {

@@ -1,6 +1,13 @@
 class TestModule {
-    run(argv, formatter) {
-        formatter.json(argv);
+    execute(argv) {
+        return Promise.resolve(argv);
+    }
+
+    viewText(argv, session) {
+        return this.execute(argv)
+            .then((result) => {
+                session.log(result);
+            });
     }
 }
 
