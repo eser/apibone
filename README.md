@@ -1,21 +1,25 @@
 # apibone
 
-A tiny backbone provides platform-agnostic environment for its modules.
+A tiny backbone that provides platform-agnostic environment for its modules.
 
-apibone is initially designed for query various web services and return responses in requested format. Whether the platform is cli or web, it provides same interface for input and output for modules.
+apibone is initially designed for query various web services and return responses in requested format. Whether the platform is cli or web, it provides the same interface for input and output for modules.
 
-An apibone query consist of 3 parts:
+An apibone query consists of 3 parts:
 
 ```sh
 module [arguments ...] [--parameter value ...]
+```
 
+For example, to execute rates module in order to query 5 USD's TRY value:
+
+```sh
 module rates usd try --amount 5 # cli example
 wget http://example.com/rates/usd/try?amount=5 # web example
 ```
 
-**module:** module name which will be called. (ex: **rates**)   
-**arguments:** arguments of operation (ex: first argument is **usd**, second argument is **try**)   
-**parameters:** optional settings for operation (ex: **amount** with value **5**)
+**module:** module name which will be called. (e.g.: **rates**)   
+**arguments:** arguments of operation (e.g.: first argument is **usd**, second argument is **try**)   
+**parameters:** optional settings for operation (e.g.: **amount** with value **5**)
 
 ### Installation
 ```sh
@@ -27,7 +31,7 @@ mv config.sample.js config.js
 ```sh
 apibone module [arguments]
 
-# Example:
+# Examples:
 apibone salyangoz --limit 2
 apibone salyangoz --limit 2 --format json
 apibone rates usd try
