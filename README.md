@@ -16,6 +16,7 @@ apibone salyangoz --limit 2
 apibone salyangoz --limit 2 --format json
 apibone rates usd try
 apibone rates usd try --amount 5
+apibone weather izmir
 apibone test anyCommand --anyParam=anyValue --anyOptionalParam
 ```
 
@@ -26,6 +27,7 @@ npm start
 # Example:
 http://localhost:3000/salyangoz?limit=2
 http://localhost:3000/rates/usd/try?amount=5
+http://localhost:3000/weather/izmir
 http://localhost:3000/test/anyCommand?anyParam=anyValue&anyOptionalParam&format=text
 ```
 
@@ -33,3 +35,4 @@ http://localhost:3000/test/anyCommand?anyParam=anyValue&anyOptionalParam&format=
 
 - Salyangoz (http://salyangoz.me)
 - Rates
+- Weather (http://openweathermap.org)
