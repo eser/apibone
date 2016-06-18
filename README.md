@@ -14,6 +14,8 @@ apibone module [arguments]
 # Example:
 apibone salyangoz --limit 2
 apibone salyangoz --limit 2 --format json
+apibone rates usd try
+apibone rates usd try --amount 5
 apibone test anyCommand --anyParam=anyValue --anyOptionalParam
 ```
 
@@ -23,9 +25,11 @@ npm start
 
 # Example:
 http://localhost:3000/salyangoz?limit=2
+http://localhost:3000/rates/usd/try?amount=5
 http://localhost:3000/test/anyCommand?anyParam=anyValue&anyOptionalParam&format=text
 ```
 
 ### Modules
 
 - Salyangoz (http://salyangoz.me)
+- Rates

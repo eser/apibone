@@ -10,7 +10,7 @@ const platform = new WebPlatform(),
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
 app.get('/*', (req, res) => {
-    let args = req.params[0].replace('/', ' ');
+    let args = req.params[0].replace(/\//g, ' ');
 
     for (let qsKey in req.query) {
         args += ` --${qsKey}=${req.query[qsKey]}`;
