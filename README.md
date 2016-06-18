@@ -13,8 +13,8 @@ module rates usd try --amount 5 # cli example
 wget http://example.com/rates/usd/try?amount=5 # web example
 ```
 
-**module:** module name which will be called. (ex: **rates**)
-**arguments:** arguments of operation (ex: first argument is **usd**, second argument is **try**)
+**module:** module name which will be called. (ex: **rates**)   
+**arguments:** arguments of operation (ex: first argument is **usd**, second argument is **try**)   
 **parameters:** optional settings for operation (ex: **amount** with value **5**)
 
 ### Installation
