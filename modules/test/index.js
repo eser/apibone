@@ -6,6 +6,14 @@ class TestModule {
     viewText(argv, session) {
         return this.execute(argv)
             .then((result) => {
+                session.log('Parameters:');
+                session.log(JSON.stringify(result));
+            });
+    }
+
+    viewJson(argv, session) {
+        return this.execute(argv)
+            .then((result) => {
                 session.log(result);
             });
     }
