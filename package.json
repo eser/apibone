@@ -1,7 +1,7 @@
 {
   "name": "apibone",
   "version": "0.0.2",
-  "description": "Enter description.",
+  "description": "A tiny and modular backbone which is designed to operate various service queries with text inputs or URL addresses.",
   "keywords": [
     "api"
   ],
