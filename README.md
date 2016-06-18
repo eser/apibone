@@ -1,10 +1,26 @@
 # apibone
 
-A tiny and modular backbone which is designed to operate various service queries with text inputs or URL addresses.
+A tiny backbone provides platform-agnostic environment for its modules.
+
+apibone is initially designed for query various web services and return responses in requested format. Whether the platform is cli or web, it provides same interface for input and output for modules.
+
+An apibone query consist of 3 parts:
+
+```sh
+module [arguments ...] [--parameter value ...]
+
+module rates usd try --amount 5 # cli example
+wget http://example.com/rates/usd/try?amount=5 # web example
+```
+
+**module:** module name which will be called. (ex: **rates**)
+**arguments:** arguments of operation (ex: first argument is **usd**, second argument is **try**)
+**parameters:** optional settings for operation (ex: **amount** with value **5**)
 
 ### Installation
 ```sh
 npm install -g apibone
+mv config.sample.js config.js
 ```
 
 ### CLI Usage
