@@ -22,6 +22,16 @@ class WebSession {
         }
     }
 
+    error(ex) {
+        this.options.response.status(500)
+            .json({
+                exception: {
+                    name: ex.name,
+                    message: ex.message
+                }
+            });
+    }
+
     end() {
         if (this.formatter === 'json') {
             this.options.response.json(this.buffer);

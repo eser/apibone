@@ -1,10 +1,13 @@
 const express = require('express'),
+    favicon = require('express-favicon'),
     WebPlatform = require('./platforms/web/WebPlatform.js'),
     ApiBone = require('./'),
     app = express();
 
 const platform = new WebPlatform(),
     apiBone = new ApiBone(platform);
+
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 app.get('/*', (req, res) => {
     let args = req.params[0].replace('/', ' ');

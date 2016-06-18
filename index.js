@@ -22,16 +22,24 @@ class ApiBone {
             delete argv.format;
         }
 
-        if (moduleInstance[method] === undefined) {
-            throw new Error(`${method} not defined in ${typeof moduleInstance}.`);
-        }
-
         const session = this.platform.createSession(formatter, options);
 
-        return moduleInstance[method](argv, session)
-            .then(() => {
-                session.end();
-            });
+        try {
+            if (moduleInstance[method] === undefined) {
+                throw new Error(`${method} not defined in ${typeof moduleInstance}.`);
+            }
+
+            return moduleInstance[method](argv, session)
+                .then(() => {
+                    session.end();
+                })
+                .catch((ex) => {
+                    session.error(ex);
+                });
+        }
+        catch (ex) {
+            session.error(ex);
+        }
     }
 }
 

@@ -8,6 +8,10 @@ class CliSession {
         console.log(text);
     }
 
+    error(ex) {
+        console.error(ex);
+    }
+
     end() {
     }
 }
