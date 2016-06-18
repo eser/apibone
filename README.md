@@ -40,6 +40,13 @@ apibone weather izmir
 apibone test anyCommand --anyParam=anyValue --anyOptionalParam
 ```
 
+### REPL Usage
+```sh
+apibone
+apibone> weather izmir
+apibone> /q
+```
+
 ### Web Usage
 ```sh
 npm start

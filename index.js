@@ -8,6 +8,32 @@ class ApiBone {
         this.platform = platform;
     }
 
+    repl() {
+        const readline = require('readline');
+
+        const readlineInstance = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+
+        readlineInstance.setPrompt('apibone> ');
+        readlineInstance.prompt();
+
+        readlineInstance.on('line', (reply) => {
+            reply = reply.trim();
+
+            if (reply === '/q' || reply === '/quit') {
+                readlineInstance.close();
+                return;
+            }
+
+            this.execute({ args: reply })
+                .then(() => {
+                    readlineInstance.prompt();
+                });
+        });
+    }
+
     execute(options) {
         const argv = yargsParser(options.args),
             cmd = argv._.shift();

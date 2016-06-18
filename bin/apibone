@@ -24,6 +24,13 @@ updateNotifier({ pkg: pkg })
 const platform = new CliPlatform(),
     apiBone = new ApiBone(platform);
 
-apiBone.execute({
-    args: process.argv.slice(2)
-});
+const args = process.argv.slice(2);
+
+if (args.length > 0) {
+    apiBone.execute({
+        args: args
+    });
+}
+else {
+    apiBone.repl();
+}
