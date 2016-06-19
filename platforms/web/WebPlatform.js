@@ -1,7 +1,8 @@
 const WebSession = require('./WebSession.js');
 
 class WebPlatform {
-    constructor() {
+    constructor(apiBone) {
+        this.parent = apiBone;
         this.defaultFormatter = 'json';
     }
 

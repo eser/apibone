@@ -18,6 +18,15 @@ class ModulesModule {
             });
     }
 
+    viewPlaintext(argv, session) {
+        return this.execute(argv)
+            .then((files) => {
+                for (let file of files) {
+                    session.log(file);
+                }
+            });
+    }
+
     viewJson(argv, session) {
         return this.execute(argv)
             .then((files) => {

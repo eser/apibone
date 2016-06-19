@@ -38,9 +38,22 @@ class SalyangozModule {
                         time = `${emoji.get(':clock1:')} ${post.time} ago`,
                         views = `${emoji.get(':dart:')}  ${post.views} views`;
 
-                    session.log(colors.grey.bold(post.title));
-                    session.log(colors.cyan.underline(post.url));
-                    session.log(`${username}  ${time} ${views}\n`);
+                    session.log(`${colors.grey.bold(post.title)}\n${colors.cyan.underline(post.url)}\n${username}  ${time} ${views}`);
+                }
+            });
+    }
+
+    viewPlaintext(argv, session) {
+        const emoji = require('node-emoji');
+
+        return this.execute(argv)
+            .then((posts) => {
+                for (let post of posts) {
+                    const username = `${emoji.get(':bust_in_silhouette:')} ${post.username}`,
+                        time = `${emoji.get(':clock1:')} ${post.time} ago`,
+                        views = `${emoji.get(':dart:')}  ${post.views} views`;
+
+                    session.log(`${post.title}\n${post.url}\n${username}  ${time} ${views}`);
                 }
             });
     }

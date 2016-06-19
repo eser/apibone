@@ -4,34 +4,8 @@ const path = require('path'),
     StringUtils = require('./utils/StringUtils.js');
 
 class ApiBone {
-    constructor(platform) {
-        this.platform = platform;
-    }
-
-    repl() {
-        const readline = require('readline');
-
-        const readlineInstance = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        });
-
-        readlineInstance.setPrompt('apibone> ');
-        readlineInstance.prompt();
-
-        readlineInstance.on('line', (reply) => {
-            reply = reply.trim();
-
-            if (reply === '/q' || reply === '/quit') {
-                readlineInstance.close();
-                return;
-            }
-
-            this.execute({ args: reply })
-                .then(() => {
-                    readlineInstance.prompt();
-                });
-        });
+    constructor(platformType) {
+        this.platform = new platformType(this);
     }
 
     execute(options) {

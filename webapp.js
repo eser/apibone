@@ -4,8 +4,7 @@ const express = require('express'),
     ApiBone = require('./'),
     app = express();
 
-const platform = new WebPlatform(),
-    apiBone = new ApiBone(platform);
+const apiBone = new ApiBone(WebPlatform);
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 

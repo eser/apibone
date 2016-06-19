@@ -21,8 +21,7 @@ process.on('exit', function () {
 updateNotifier({ pkg: pkg })
     .notify({ defer: false });
 
-const platform = new CliPlatform(),
-    apiBone = new ApiBone(platform);
+const apiBone = new ApiBone(CliPlatform);
 
 const args = process.argv.slice(2);
 
@@ -32,5 +31,5 @@ if (args.length > 0) {
     });
 }
 else {
-    apiBone.repl();
+    apiBone.platform.repl();
 }

@@ -34,6 +34,17 @@ class WeatherModule {
             });
     }
 
+    viewPlaintext(argv, session) {
+        return this.execute(argv)
+            .then((result) => {
+                const cityStr = `${result.city}`,
+                    tempStr = `${result.temperature}°C (${result.temperatureMin}/${result.temperatureMax})`,
+                    detailStr = `${result.brief} (${result.detail})`;
+
+                session.log(`${cityStr} ${tempStr} ${detailStr}`);
+            });
+    }
+
     viewJson(argv, session) {
         return this.execute(argv)
             .then((result) => {

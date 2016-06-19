@@ -30,6 +30,16 @@ class RatesModule {
             });
     }
 
+    viewPlaintext(argv, session) {
+        return this.execute(argv)
+            .then((result) => {
+                const fromStr = `${result.amount} ${result.from}`,
+                    toStr = `${result.rate} ${result.to}`;
+
+                session.log(`${fromStr} => ${toStr}`);
+            });
+    }
+
     viewJson(argv, session) {
         return this.execute(argv)
             .then((result) => {
