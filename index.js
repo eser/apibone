@@ -12,6 +12,13 @@ class ApiBone {
         const argv = yargsParser(options.args),
             cmd = argv._.shift();
 
+        try {
+            fs.accessSync(path.join(__dirname, `modules/${cmd}/index.js`), fs.F_OK);
+        }
+        catch (ex) {
+            throw new Error(`${cmd} is not a registered module.`);
+        }
+
         const moduleType = require(`./modules/${cmd}/`),
             moduleInstance = new moduleType();
 
@@ -26,7 +33,7 @@ class ApiBone {
 
         try {
             if (moduleInstance[method] === undefined) {
-                throw new Error(`${method} not defined in ${typeof moduleInstance}.`);
+                throw new Error(`${method} is not defined in ${cmd} module.`);
             }
 
             return moduleInstance[method](argv, session)

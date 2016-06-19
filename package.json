@@ -1,6 +1,6 @@
 {
   "name": "apibone",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A tiny backbone that provides platform-agnostic environment for its modules.",
   "keywords": [
     "api"

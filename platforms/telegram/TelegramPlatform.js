@@ -19,11 +19,22 @@ class TelegramPlatform {
     }
 
     onMessage(message) {
-        this.parent.execute({
-            bot: this.bot,
-            message: message,
-            args: message.text.replace(/—/g, '--')
-        });
+        console.log(message);
+
+        if (message.text === undefined) {
+            return;
+        }
+
+        try {
+            this.parent.execute({
+                bot: this.bot,
+                message: message,
+                args: message.text.replace(/—/g, '--')
+            });
+        }
+        catch (ex) {
+            console.log(ex);
+        }
     }
 }
 
