@@ -43,7 +43,7 @@ class SalyangozModule {
             });
     }
 
-    viewPlaintext(argv, session) {
+    viewMarkdown(argv, session) {
         const emoji = require('node-emoji');
 
         return this.execute(argv)

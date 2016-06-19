@@ -5,7 +5,7 @@ const TelegramBot = require('node-telegram-bot'),
 class TelegramPlatform {
     constructor(apiBone) {
         this.parent = apiBone;
-        this.defaultFormatter = 'plaintext';
+        this.defaultFormatter = 'markdown';
 
         this.bot = new TelegramBot({
             token: config.telegram.botToken

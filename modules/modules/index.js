@@ -18,7 +18,7 @@ class ModulesModule {
             });
     }
 
-    viewPlaintext(argv, session) {
+    viewMarkdown(argv, session) {
         return this.execute(argv)
             .then((files) => {
                 for (let file of files) {

@@ -10,7 +10,7 @@ class TestModule {
             });
     }
 
-    viewPlaintext(argv, session) {
+    viewMarkdown(argv, session) {
         return this.execute(argv)
             .then((result) => {
                 session.log(`Parameters:\n${JSON.stringify(result)}`);

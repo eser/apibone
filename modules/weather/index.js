@@ -34,7 +34,7 @@ class WeatherModule {
             });
     }
 
-    viewPlaintext(argv, session) {
+    viewMarkdown(argv, session) {
         return this.execute(argv)
             .then((result) => {
                 const cityStr = `${result.city}`,

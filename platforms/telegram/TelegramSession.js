@@ -10,7 +10,8 @@ class TelegramSession {
         const response = {
             chat_id: message.chat.id,
             reply_to_message_id: message.message_id,
-            text: text
+            text: text,
+            parse_mode: 'Markdown'
         };
 
         this.options.bot.sendMessage(response);

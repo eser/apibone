@@ -30,13 +30,13 @@ class RatesModule {
             });
     }
 
-    viewPlaintext(argv, session) {
+    viewMarkdown(argv, session) {
         return this.execute(argv)
             .then((result) => {
                 const fromStr = `${result.amount} ${result.from}`,
                     toStr = `${result.rate} ${result.to}`;
 
-                session.log(`${fromStr} => ${toStr}`);
+                session.log(`*${fromStr}* => *${toStr}*`);
             });
     }
 
