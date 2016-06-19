@@ -10,9 +10,25 @@ class ApiBone {
 
     execute(options) {
         const argv = yargsParser(options.args),
-            cmd = argv._.shift();
+            cmdOriginal = argv._.shift();
+
+        const startPos = (cmdOriginal[0] == '/') ? 1 : 0,
+            atPos = cmdOriginal.indexOf('@');
+
+        let cmd;
+
+        if (atPos > 0) {
+            cmd = cmdOriginal.substr(startPos, atPos - startPos);
+        }
+        else {
+            cmd = cmdOriginal.substr(startPos);
+        }
 
         try {
+            if (cmd.indexOf('.') >= 0 || cmd.indexOf('/') >= 0) {
+                throw new Error('forbidden characters in command.');
+            }
+
             fs.accessSync(path.join(__dirname, `modules/${cmd}/index.js`), fs.F_OK);
         }
         catch (ex) {
