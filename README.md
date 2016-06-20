@@ -67,3 +67,4 @@ http://localhost:3000/test/anyCommand?anyParam=anyValue&anyOptionalParam&format=
 - Salyangoz (http://salyangoz.me)
 - Rates
 - Weather (http://openweathermap.org)
+- Def
