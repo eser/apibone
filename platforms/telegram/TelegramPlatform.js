@@ -21,7 +21,7 @@ class TelegramPlatform {
     onMessage(message) {
         console.log(message);
 
-        if (message.text === undefined) {
+        if (message === undefined || message.text === undefined) {
             return;
         }
 
