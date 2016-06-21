@@ -7,6 +7,10 @@ class WeatherModule {
     }
 
     execute(argv) {
+        if (argv._.length < 1) {
+            return Promise.reject(new Error(`needs a city to query, e.g.: izmir`));
+        }
+
         const city = argv._[0],
             unit = argv.metric || 'metric',
             apiKey = config.openweathermap.apiKey;
@@ -16,8 +20,7 @@ class WeatherModule {
             .then((json) => {
                 return Promise.resolve({
                     city: json.name,
-                    temperature: json.main.temp,
-                    temperatureMin: json.main.temp_min,
+                    temperature: json.main.temp_min,
                     temperatureMax: json.main.temp_max,
                     brief: json.weather[0].main,
                     detail: json.weather[0].description
@@ -31,8 +34,13 @@ class WeatherModule {
         return this.execute(argv)
             .then((result) => {
                 const cityStr = `${result.city}`,
-                    tempStr = `${result.temperature}°C (${result.temperatureMin}/${result.temperatureMax})`,
                     detailStr = `${result.brief} (${result.detail})`;
+
+                let tempStr = `${result.temperature}°C`;
+
+                if (result.temperature !== result.temperatureMax) {
+                    tempStr += `-${result.temperatureMax}°C`;
+                }
 
                 session.log(`${colors.yellow.bold(cityStr)} ${colors.green.bold(tempStr)} ${detailStr}`);
             });
@@ -42,10 +50,15 @@ class WeatherModule {
         return this.execute(argv)
             .then((result) => {
                 const cityStr = `${result.city}`,
-                    tempStr = `${result.temperature}°C (${result.temperatureMin}/${result.temperatureMax})`,
                     detailStr = `${result.brief} (${result.detail})`;
 
-                session.log(`${cityStr} ${tempStr} ${detailStr}`);
+                let tempStr = `${result.temperature}°C`;
+
+                if (result.temperature !== result.temperatureMax) {
+                    tempStr += `-${result.temperatureMax}°C`;
+                }
+
+                session.log(`*${cityStr}* ${tempStr} ${detailStr}`);
             });
     }
 

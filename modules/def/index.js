@@ -19,6 +19,10 @@ class DefModule {
     }
 
     execute(argv) {
+        if (argv._.length < 1) {
+            return Promise.reject(new Error(`needs a parameter to query`));
+        }
+
         const input = argv._.join(' ');
 
         if (config.def !== undefined) {
