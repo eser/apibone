@@ -1,36 +1,34 @@
-const path = require('path'),
-    fs = require('fs');
-
 class ModulesModule {
-    execute(argv) {
-        const dir = path.join(__dirname, '..'),
-            files = fs.readdirSync(dir);
+    constructor(apiBone) {
+        this.parent = apiBone;
+    }
 
-        return Promise.resolve(files);
+    execute(argv) {
+        return Promise.resolve(this.parent.modules);
     }
 
     viewText(argv, session) {
         return this.execute(argv)
-            .then((files) => {
-                for (let file of files) {
-                    session.log(file);
+            .then((modules) => {
+                for (let module of modules) {
+                    session.log(module);
                 }
             });
     }
 
     viewMarkdown(argv, session) {
         return this.execute(argv)
-            .then((files) => {
-                for (let file of files) {
-                    session.log(file);
+            .then((modules) => {
+                for (let module of modules) {
+                    session.log(module);
                 }
             });
     }
 
     viewJson(argv, session) {
         return this.execute(argv)
-            .then((files) => {
-                session.log(files);
+            .then((modules) => {
+                session.log(modules);
             });
     }
 }

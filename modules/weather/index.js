@@ -2,6 +2,10 @@ const fetch = require('node-fetch'),
     config = require('../../config.js');
 
 class WeatherModule {
+    constructor(apiBone) {
+        this.parent = apiBone;
+    }
+
     execute(argv) {
         const city = argv._[0],
             unit = argv.metric || 'metric',

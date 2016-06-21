@@ -1,4 +1,8 @@
 class TestModule {
+    constructor(apiBone) {
+        this.parent = apiBone;
+    }
+
     execute(argv) {
         return Promise.resolve(argv);
     }

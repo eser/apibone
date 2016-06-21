@@ -1,6 +1,10 @@
 const fetch = require('node-fetch');
 
 class RatesModule {
+    constructor(apiBone) {
+        this.parent = apiBone;
+    }
+
     execute(argv) {
         const from = argv._[0].toUpperCase(),
             to = argv._[1].toUpperCase(),

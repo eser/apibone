@@ -1,6 +1,10 @@
 const fetch = require('node-fetch');
 
 class SalyangozModule {
+    constructor(apiBone) {
+        this.parent = apiBone;
+    }
+
     execute(argv) {
         return fetch('https://salyangoz.me/recent.json')
             .then((res) => res.json())

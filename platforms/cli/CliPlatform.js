@@ -13,6 +13,8 @@ class CliPlatform {
     repl() {
         const readline = require('readline');
 
+        const quitCommands = [ '/q', '\\q', '/quit' ];
+
         const readlineInstance = readline.createInterface({
             input: process.stdin,
             output: process.stdout
@@ -24,15 +26,23 @@ class CliPlatform {
         readlineInstance.on('line', (reply) => {
             reply = reply.trim();
 
-            if (reply === '/q' || reply === '/quit') {
+            if (quitCommands.indexOf(reply) !== -1) {
                 readlineInstance.close();
                 return;
             }
 
-            this.parent.execute({ args: reply })
-                .then(() => {
-                    readlineInstance.prompt();
-                });
+            try {
+                this.parent.execute({ args: reply })
+                    .then(() => {
+                        readlineInstance.prompt();
+                    })
+                    .catch((ex) => {
+                        throw ex;
+                    });
+            }
+            catch (ex) {
+                console.log(ex.message);
+            }
         });
     }
 }

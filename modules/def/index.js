@@ -1,25 +1,45 @@
 const NumberUtils = require('../../utils/NumberUtils.js'),
     config = require('../../config.js');
 
+const defaultResponses = [ 'no such thing - $0' ];
+
 class DefModule {
+    constructor(apiBone) {
+        this.parent = apiBone;
+    }
+
+    respond(responses, replacements) {
+        let response = responses[NumberUtils.getRandomInt(0, responses.length - 1)];
+
+        for (let replacement in replacements) {
+            response = response.replace(new RegExp('\\$' + replacement, 'g'), replacements[replacement]);
+        }
+
+        return Promise.resolve(response);
+    }
+
     execute(argv) {
         const input = argv._.join(' ');
 
-        for (let regex in config.def) {
-            const pattern = new RegExp(regex, 'i'),
-                responses = config.def[regex],
-                result = pattern.exec(input);
+        if (config.def !== undefined) {
+            for (let regex in config.def) {
+                const pattern = new RegExp(regex, 'i'),
+                    responses = config.def[regex],
+                    result = pattern.exec(input);
 
-            let response = responses[NumberUtils.getRandomInt(0, responses.length - 1)];
+                if (result === null) {
+                    continue;
+                }
 
-            for (let i = 0, length = result.length; i < length; i++) {
-                response = response.replace(new RegExp('\\$' + i, 'g'), result[i]);
+                return this.respond(responses, result);
             }
 
-            return Promise.resolve(response);
+            if (config.def.default !== undefined) {
+                return this.respond(config.def.default, [input]);
+            }
         }
 
-        return Promise.resolve(config.def.default);
+        return this.respond(defaultResponses, [input]);
     }
 
     viewText(argv, session) {

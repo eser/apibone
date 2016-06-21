@@ -1,4 +1,7 @@
 module.exports = {
+    aliases: {
+        'bot': 'def bot'
+    },
     telegram: {
         botToken: ''
     },
@@ -7,6 +10,6 @@ module.exports = {
     },
     def: {
         'bot': [ 'i\'m a $0!' ],
-        default: 'dunno.'
+        default: [ 'dunno - $0' ]
     }
 };
