@@ -22,6 +22,9 @@ class WebSession {
         }
     }
 
+    voice(filename, contentType, stream) {
+    }
+
     error(ex) {
         this.options.response.status(500)
             .json({

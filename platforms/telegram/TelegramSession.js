@@ -9,6 +9,22 @@ class TelegramSession {
         this.output.push(text);
     }
 
+    voice(filename, contentType, stream) {
+        const message = this.options.message;
+
+        const response = {
+            chat_id: message.chat.id,
+            files: {
+                filename: filename,
+                contentType: contentType,
+                stream: stream
+            }
+            reply_to_message_id: message.message_id
+        };
+
+        this.options.bot.sendAudio(response);
+    }
+
     error(ex) {
         this.output.push(ex.message);
     }
@@ -23,7 +39,7 @@ class TelegramSession {
             parse_mode: 'Markdown'
         };
 
-        this.options.bot.sendMessage(response)
+        this.options.bot.sendMessage(response);
     }
 }
 

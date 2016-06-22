@@ -8,6 +8,9 @@ class CliSession {
         console.log(text);
     }
 
+    voice(filename, contentType, stream) {
+    }
+
     error(ex) {
         console.error(ex.message);
     }
