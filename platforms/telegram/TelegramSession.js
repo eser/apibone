@@ -1,6 +1,7 @@
-const fs = require('fs');
+const fs = require('fs'),
+    EventEmitter = require('events').EventEmitter;
 
-class TelegramSession {
+class TelegramSession extends EventEmitter {
     constructor(formatter, options) {
         this.formatter = formatter;
         this.options = options;
@@ -42,6 +43,8 @@ class TelegramSession {
         };
 
         this.options.bot.sendMessage(response);
+
+        this.emit('end');
     }
 }
 

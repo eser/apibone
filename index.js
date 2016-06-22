@@ -67,7 +67,7 @@ class ApiBone {
     }
 
     parseArgv(args) {
-        const argv = yargsParser(args);
+        const argv = yargsParser(args.replace('  ', ' '));
 
         if (argv._.length > 0) {
             argv._[0] = this.stripCmd0(argv._[0]);

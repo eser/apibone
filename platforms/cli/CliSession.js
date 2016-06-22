@@ -1,4 +1,6 @@
-class CliSession {
+const EventEmitter = require('events').EventEmitter;
+
+class CliSession extends EventEmitter {
     constructor(formatter, options) {
         this.formatter = formatter;
         this.options = options;
@@ -17,6 +19,7 @@ class CliSession {
     }
 
     end() {
+        this.emit('end');
     }
 }
 
