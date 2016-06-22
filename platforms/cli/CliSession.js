@@ -1,9 +1,11 @@
 const EventEmitter = require('events').EventEmitter;
 
-class CliSession extends EventEmitter {
+class CliSession {
     constructor(formatter, options) {
         this.formatter = formatter;
         this.options = options;
+
+        this.events = new EventEmitter();
     }
 
     log(text) {
@@ -19,7 +21,7 @@ class CliSession extends EventEmitter {
     }
 
     end() {
-        this.emit('end');
+        this.events.emit('end');
     }
 }
 

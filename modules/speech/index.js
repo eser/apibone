@@ -35,7 +35,7 @@ function speechCommand(argv, session) {
                             formatJson: (result) => { session.voice(result); }
                         });
 
-                        session.on('end', cleanup);
+                        session.events.on('end', cleanup);
                     });
                 });
             });

@@ -19,27 +19,27 @@ function defCommand(argv, session) {
         });
     }
 
-    const input = argv._.join(' ');
+    const input = argv._;
 
     if (config.def !== undefined) {
         for (let regex in config.def) {
             const pattern = new RegExp(regex, 'i'),
                 responses = config.def[regex],
-                result = pattern.exec(input);
+                result = pattern.exec(input.join(' '));
 
             if (result === null) {
                 continue;
             }
 
-            return respond(responses, result);
+            return respond(responses, input);
         }
 
         if (config.def.default !== undefined) {
-            return respond(config.def.default, [input]);
+            return respond(config.def.default, input);
         }
     }
 
-    return respond(defaultResponses, [input]);
+    return respond(defaultResponses, input);
 }
 
 apiBone.addCommand({

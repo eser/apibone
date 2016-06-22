@@ -1,11 +1,13 @@
 const Readable = require('stream').Readable,
     EventEmitter = require('events').EventEmitter;
 
-class WebSession extends EventEmitter {
+class WebSession {
     constructor(formatter, options) {
         this.formatter = formatter;
         this.options = options;
         this.buffer = null;
+
+        this.events = new EventEmitter();
     }
 
     log(text) {
@@ -46,7 +48,7 @@ class WebSession extends EventEmitter {
             this.options.response.send(this.buffer);
         }
 
-        this.emit('end');
+        this.events.emit('end');
     }
 }
 
