@@ -18,7 +18,7 @@ class TelegramSession {
                 filename: filename,
                 contentType: contentType,
                 stream: stream
-            }
+            },
             reply_to_message_id: message.message_id
         };
 
