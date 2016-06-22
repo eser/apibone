@@ -137,6 +137,8 @@ class ApiBone {
         }
         catch (ex) {
             session.error(ex);
+            session.end();
+
             return Promise.reject(ex);
         }
     }

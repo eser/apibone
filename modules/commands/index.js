@@ -16,7 +16,7 @@ function commandsCommand(argv, session) {
         },
         formatMarkdown: (result) => {
             for (let command of result) {
-                session.log(`*${command.command}*: ${command.description}`);
+                session.log(`*${command.command}*: ${command.description} - \`${command.usage}\``);
             }
         },
         formatJson: (result) => { session.log(result); }

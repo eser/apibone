@@ -11,7 +11,6 @@ class TelegramSession {
 
     error(ex) {
         this.output.push(ex.message);
-        // console.error(ex.message);
     }
 
     end() {
