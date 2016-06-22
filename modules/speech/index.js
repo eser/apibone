@@ -1,4 +1,5 @@
 const https = require('https'),
+    stream = require('stream'),
     config = require('../../config.js');
 
 function speechCommand(argv, session) {
@@ -8,18 +9,20 @@ function speechCommand(argv, session) {
 
         const streamUrl = `https://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&client=tw-ob&q=${input}&tl=${lang}`;
 
+        const spt = new stream.PassThrough();
+
         https.get(streamUrl, (res) => {
-            res.on('response', (response) => {
-                resolve({
-                    response: {
-                        filename: `${input}.mp3`,
-                        contentType: 'audio/mpeg',
-                        stream: stream
-                    },
-                    formatText: (result) => { session.voice(result.filename, result.contentType, result.stream); },
-                    formatMarkdown: (result) => { session.voice(result.filename, result.contentType, result.stream); },
-                    formatJson: (result) => { session.voice(result.filename, result.contentType, result.stream); }
-                });
+            res.pipe(spt);
+
+            resolve({
+                response: {
+                    filename: `${input}.mp3`,
+                    contentType: 'audio/mpeg',
+                    stream: spt
+                },
+                formatText: (result) => { session.voice(result.filename, result.contentType, result.stream); },
+                formatMarkdown: (result) => { session.voice(result.filename, result.contentType, result.stream); },
+                formatJson: (result) => { session.voice(result.filename, result.contentType, result.stream); }
             });
         });
     });
