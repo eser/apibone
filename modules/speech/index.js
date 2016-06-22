@@ -2,20 +2,26 @@ const https = require('https'),
     config = require('../../config.js');
 
 function speechCommand(argv, session) {
-    const input = encodeURIComponent(argv._.join(' ')),
-        lang = argv.lang || 'tr';
+    return new Promise((resolve, reject) => {
+        const input = encodeURIComponent(argv._.join(' ')),
+            lang = argv.lang || 'tr';
 
-    const stream = https.get(`https://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&client=tw-ob&q=${input}&tl=${lang}`);
+        const streamUrl = `https://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&client=tw-ob&q=${input}&tl=${lang}`;
 
-    return Promise.resolve({
-        response: {
-            filename: `${input}.mp3`,
-            contentType: 'audio/mpeg',
-            stream: stream
-        },
-        formatText: (result) => { session.voice(result.filename, result.contentType, result.stream); },
-        formatMarkdown: (result) => { session.voice(result.filename, result.contentType, result.stream); },
-        formatJson: (result) => { session.voice(result.filename, result.contentType, result.stream); }
+        https.get(streamUrl, (res) => {
+            res.on('response', (response) => {
+                resolve({
+                    response: {
+                        filename: `${input}.mp3`,
+                        contentType: 'audio/mpeg',
+                        stream: stream
+                    },
+                    formatText: (result) => { session.voice(result.filename, result.contentType, result.stream); },
+                    formatMarkdown: (result) => { session.voice(result.filename, result.contentType, result.stream); },
+                    formatJson: (result) => { session.voice(result.filename, result.contentType, result.stream); }
+                });
+            });
+        });
     });
 }
 
