@@ -128,7 +128,16 @@ class ApiBone {
 
             return argv.command.callback(argv, session)
                 .then((responseObject) => {
-                    responseObject[formatterMethod](responseObject.response);
+                    let responseText = responseObject.response;
+
+                    if (responseObject.responseReplace === true) {
+                        for (let replacement in argv._) {
+                            responseText = responseText.replace(new RegExp('\\$' + replacement + '\\*', 'g'), argv._.slice(replacement).join(' '))
+                                .replace(new RegExp('\\$' + replacement, 'g'), argv._[replacement]);
+                        }
+                    }
+
+                    responseObject[formatterMethod](responseText);
                     session.end();
                 })
                 .catch((ex) => {
