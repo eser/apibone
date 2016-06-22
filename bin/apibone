@@ -26,9 +26,7 @@ const apiBone = new ApiBone(CliPlatform);
 const args = process.argv.slice(2);
 
 if (args.length > 0) {
-    apiBone.execute({
-        args: args
-    });
+    apiBone.execute({ args: args });
 }
 else {
     apiBone.platform.repl();

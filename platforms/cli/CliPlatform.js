@@ -31,18 +31,10 @@ class CliPlatform {
                 return;
             }
 
-            try {
-                this.parent.execute({ args: reply })
-                    .then(() => {
-                        readlineInstance.prompt();
-                    })
-                    .catch((ex) => {
-                        throw ex;
-                    });
-            }
-            catch (ex) {
-                console.log(ex.message);
-            }
+            this.parent.execute({ args: reply })
+                .then(() => {
+                    readlineInstance.prompt();
+                });
         });
     }
 }

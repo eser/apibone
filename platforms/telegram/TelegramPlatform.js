@@ -25,16 +25,14 @@ class TelegramPlatform {
             return;
         }
 
-        try {
-            this.parent.execute({
-                bot: this.bot,
-                message: message,
-                args: message.text.replace(/—/g, '--')
+        this.parent.execute({
+            bot: this.bot,
+            message: message,
+            args: message.text.replace(/—/g, '--')
+        })
+            .catch((ex) => {
+                console.error(ex);
             });
-        }
-        catch (ex) {
-            console.log(ex);
-        }
     }
 }
 

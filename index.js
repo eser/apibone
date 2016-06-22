@@ -8,22 +8,54 @@ class ApiBone {
     constructor(platformType) {
         this.platform = new platformType(this);
 
+        this.commands = {};
+        this.loadCommands();
+
         this.aliases = {};
-        this.assignModules();
+        this.loadAliases();
     }
 
-    assignModules() {
+    /*
+    apiBone.addCommand({
+        command: 'def',
+        description: 'Defines things',
+        demandArgs: 1,
+        demandOptions: [ 'format' ],
+        callback: null
+    });
+    */
+    addCommand(commandDefinition) {
+        this.commands[commandDefinition.command] = commandDefinition;
+    }
+
+    loadCommands() {
         const dir = path.join(__dirname, 'modules'),
             files = fs.readdirSync(dir);
 
-        this.modules = {};
-
+        global.apiBone = this;
         for (let file of files) {
-            this.modules[file] = file;
+            require(`./modules/${file}`);
         }
     }
 
-    stripCmd(cmd0) {
+    /*
+    apiBone.addAlias('define', 'def');
+    */
+    addAlias(alias, command) {
+        this.aliases[alias] = command;
+    }
+
+    loadAliases() {
+        if (config.aliases === undefined) {
+            return;
+        }
+
+        for (let alias in config.aliases) {
+            this.addAlias(alias, config.aliases[alias]);
+        }
+    }
+
+    stripCmd0(cmd0) {
         const startPos = (cmd0[0] == '/') ? 1 : 0,
             atPos = cmd0.indexOf('@');
 
@@ -38,73 +70,74 @@ class ApiBone {
         const argv = yargsParser(args);
 
         if (argv._.length > 0) {
-            argv._[0] = this.stripCmd(argv._[0]);
+            argv._[0] = this.stripCmd0(argv._[0]);
         }
 
-        if (config.aliases !== undefined) {
-            let joined = argv._.join(' ');
+        let joined = argv._.join(' ');
 
-            for (let alias in config.aliases) {
-                const aliasLength = alias.length;
+        for (let alias in this.aliases) {
+            const aliasLength = alias.length;
 
-                if (joined.substr(0, aliasLength) === alias) {
-                    joined = config.aliases[alias] + joined.substr(aliasLength);
-                }
+            if (joined.substr(0, aliasLength) === alias) {
+                joined = this.aliases[alias] + joined.substr(aliasLength);
             }
-
-            argv._ = (joined.length > 0) ? joined.split(' ') : [];
         }
+
+        for (let command in this.commands) {
+            const commandLength = command.length;
+
+            if (joined.substr(0, commandLength) === command) {
+                argv.command = this.commands[command];
+                joined = joined.substr(commandLength).trim();
+            }
+        }
+
+        argv._ = (joined.length > 0) ? joined.split(' ') : [];
 
         return argv;
     }
 
-    initModule(moduleName) {
-        const module = this.modules[moduleName];
-
-        if (module === undefined) {
-            throw new Error(`${moduleName} is not a registered module.`);
-        }
-
-        const moduleType = require(`./modules/${module}/`),
-            moduleInstance = new moduleType(this);
-
-        return moduleInstance;
-    }
-
     execute(options) {
-        const argv = this.parseArgv(options.args),
-            cmd0 = argv._.shift();
+        const argv = this.parseArgv(options.args);
 
-        if (cmd0 === undefined || cmd0.trim().length === 0) {
-            return Promise.resolve();
-        }
-
-        const moduleInstance = this.initModule(cmd0);
-
+        // determine default formatter
         const formatter = argv.format || this.platform.defaultFormatter,
-            method = `view${StringUtils.capitalize(formatter)}`;
+            formatterMethod = `format${StringUtils.capitalize(formatter)}`;
 
         if (argv.format !== undefined) {
             delete argv.format;
         }
 
+        // create session
         const session = this.platform.createSession(formatter, options);
 
         try {
-            if (moduleInstance[method] === undefined) {
-                throw new Error(`${method} is not defined in ${cmd0} module.`);
+            // check command
+            if (argv.command === undefined) {
+                if (argv._.length === 0) {
+                    return Promise.resolve();
+                }
+
+                throw new Error('command not found');
             }
 
-            return moduleInstance[method](argv, session)
-                .then(() => {
+            // check demands
+            if (argv._.length < argv.command.demandArgs) {
+                throw new Error(`command usage: ${argv.command.usage}`);
+            }
+
+            return argv.command.callback(argv, session)
+                .then((responseObject) => {
+                    responseObject[formatterMethod](responseObject.response);
                     session.end();
                 })
                 .catch((ex) => {
-                    session.error(ex);
+                    throw ex;
                 });
         }
         catch (ex) {
             session.error(ex);
+            return Promise.reject(ex);
         }
     }
 }

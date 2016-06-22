@@ -9,7 +9,7 @@ class CliSession {
     }
 
     error(ex) {
-        console.error(ex);
+        console.error(ex.message);
     }
 
     end() {
