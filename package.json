@@ -1,6 +1,6 @@
 {
   "name": "apibone",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "A tiny backbone that provides platform-agnostic environment for its modules.",
   "keywords": [
     "api"
@@ -38,6 +38,7 @@
     "node-emoji": "^1.3.0",
     "node-fetch": "^1.5.3",
     "node-telegram-bot": "^0.1.9",
+    "tmp": "0.0.28",
     "update-notifier": "^0.7.0",
     "yargs-parser": "^2.4.0"
   },

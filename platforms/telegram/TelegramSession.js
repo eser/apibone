@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 class TelegramSession {
     constructor(formatter, options) {
         this.formatter = formatter;
@@ -9,15 +11,15 @@ class TelegramSession {
         this.output.push(text);
     }
 
-    voice(filename, contentType, stream) {
+    voice(options) {
         const message = this.options.message;
 
         const response = {
             chat_id: message.chat.id,
             files: {
-                filename: filename,
-                contentType: contentType,
-                stream: stream
+                filename: options.filename,
+                contentType: options.contentType,
+                stream: fs.createReadStream(options.audioFile)
             },
             reply_to_message_id: message.message_id
         };

@@ -8,7 +8,8 @@ class CliSession {
         console.log(text);
     }
 
-    voice(filename, contentType, stream) {
+    voice(options) {
+        console.log(`** voice is not supported - ${options.sourceUrl}`);
     }
 
     error(ex) {

@@ -1,5 +1,7 @@
 const https = require('https'),
+    fs = require('fs'),
     stream = require('stream'),
+    tmp = require('tmp'),
     config = require('../../config.js');
 
 function speechCommand(argv, session) {
@@ -9,20 +11,33 @@ function speechCommand(argv, session) {
 
         const streamUrl = `https://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&client=tw-ob&q=${input}&tl=${lang}`;
 
-        const spt = new stream.PassThrough();
-
         https.get(streamUrl, (res) => {
-            res.pipe(spt);
+            tmp.file({ prefix: input, postfix: '.mp3' }, (err, fileToWrite, fd, cleanup) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
 
-            resolve({
-                response: {
-                    filename: `${input}.mp3`,
-                    contentType: 'audio/mpeg',
-                    stream: spt
-                },
-                formatText: (result) => { session.voice(result.filename, result.contentType, result.stream); },
-                formatMarkdown: (result) => { session.voice(result.filename, result.contentType, result.stream); },
-                formatJson: (result) => { session.voice(result.filename, result.contentType, result.stream); }
+                const streamToWrite = fs.createWriteStream(fileToWrite);
+
+                res.pipe(streamToWrite);
+                streamToWrite.on('finish', () => {
+                    streamToWrite.close(() => {
+                        resolve({
+                            response: {
+                                filename: `${input}.mp3`,
+                                contentType: 'audio/mpeg',
+                                audioFile: fileToWrite,
+                                sourceUrl: streamUrl
+                            },
+                            formatText: (result) => { session.voice(result); },
+                            formatMarkdown: (result) => { session.voice(result); },
+                            formatJson: (result) => { session.voice(result); }
+                        });
+
+                        // cleanup();
+                    });
+                });
             });
         });
     });

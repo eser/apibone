@@ -22,7 +22,9 @@ class WebSession {
         }
     }
 
-    voice(filename, contentType, stream) {
+    voice(options) {
+        this.options.response.status(501)
+            .send(`** voice is not supported - ${options.sourceUrl}`);
     }
 
     error(ex) {
