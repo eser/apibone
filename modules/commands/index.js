@@ -1,6 +1,6 @@
 function commandsCommand(argv, session) {
     return Promise.resolve({
-        response: apiBone.commands,
+        response: JSON.keys(apiBone.commands),
         formatText: (result) => {
             for (let command of result) {
                 session.log(command);
