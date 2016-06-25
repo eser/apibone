@@ -7,7 +7,7 @@
 
 [apibone](https://github.com/eserozvataf/apibone) is an unified platform for queryable services. It simply provides environment-agnostic interfaces/objects for its modules.
 
-apibone modules queries various web services and return responses in requested formatting. Whether the platform is cli or web, modules access same interface for input and output objects.
+apibone modules query various web services and return responses in requested formatting. Whether the platform is cli or web, modules access same interface for input and output objects.
 
 
 ## Queries
@@ -81,13 +81,19 @@ http://localhost:3000/test/anyCommand?anyParam=anyValue&anyOptionalParam&format=
 ```
 
 
+### Start as a Telegram Bot
+```sh
+$ node ./lib/telegrambot.js
+```
+
+
 ### Modules
 
 - Salyangoz (http://salyangoz.me)
 - Rates
 - Weather (http://openweathermap.org)
 - Def
-- Speech
+- Speech (https://translate.google.com/)
 
 
 ### Requirements

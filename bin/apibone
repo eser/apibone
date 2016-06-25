@@ -4,8 +4,8 @@
 
 const updateNotifier = require('update-notifier'),
     pkg = require('../package.json'),
-    CliPlatform = require('../platforms/cli/CliPlatform.js'),
-    ApiBone = require('../');
+    CliPlatform = require('../lib/platforms/cli/CliPlatform.js'),
+    ApiBone = require('../lib/');
 
 let exitCode = 0;
 

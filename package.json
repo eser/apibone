@@ -1,6 +1,6 @@
 {
   "name": "apibone",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "An unified platform for queryable services.",
   "keywords": [
     "api"
@@ -25,6 +25,7 @@
     }
   ],
   "preferGlobal": true,
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/eserozvataf/apibone.git"
@@ -43,11 +44,14 @@
     "yargs-parser": "^2.4.0"
   },
   "scripts": {
-    "start": "node ./webapp.js",
+    "start": "node ./lib/webapp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
-    "bin"
+    "bin",
+    "lib",
+    "package.json",
+    "config.sample.js"
   ],
   "bin": {
     "apibone": "./bin/apibone"

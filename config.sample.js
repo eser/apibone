@@ -9,7 +9,7 @@ module.exports = {
         apiKey: ''
     },
     def: {
-        'bot': [ 'i\'m a $0!' ],
+        '^bot': [ 'i\'m a $0!' ],
         default: [ 'dunno - $0' ]
     }
 };
