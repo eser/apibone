@@ -1,10 +1,24 @@
 # apibone
 
-A tiny backbone that provides platform-agnostic environment for its modules.
+[![npm version][npm-image]][npm-url]
+[![npm download][download-image]][npm-url]
+[![dependencies][dep-image]][dep-url]
+[![license][license-image]][license-url]
 
-apibone is initially designed for query various web services and return responses in requested format. Whether the platform is cli or web, it provides the same interface for input and output for modules.
+[apibone](https://github.com/eserozvataf/apibone) is an unified platform for queryable services. It simply provides environment-agnostic interfaces/objects for its modules.
 
-An apibone query consists of 3 parts:
+apibone modules queries various web services and return responses in requested formatting. Whether the platform is cli or web, modules access same interface for input and output objects.
+
+
+## Queries
+
+Apibone breaks queries in three parts:
+
+- Module name / alias
+- Arguments
+- Parameters
+
+in command line form:
 
 ```sh
 module [arguments ...] [--parameter value ...]
@@ -21,11 +35,13 @@ http://example.com/rates/usd/try?amount=5 # web example
 **arguments:** arguments of operation (e.g.: first argument is **usd**, second argument is **try**)   
 **parameters:** optional settings for operation (e.g.: **amount** with value **5**)
 
+
 ### Installation
 ```sh
 $ npm install -g apibone
 $ mv config.sample.js config.js # rename config.sample.js to config.js
 ```
+
 
 ### CLI Usage
 ```sh
@@ -41,6 +57,7 @@ $ apibone weather izmir
 $ apibone test anyCommand --anyParam=anyValue --anyOptionalParam
 ```
 
+
 ### REPL Usage
 ```sh
 $ apibone
@@ -49,6 +66,7 @@ apibone> modules
 apibone> weather izmir
 apibone> /q
 ```
+
 
 ### Web Usage
 ```sh
@@ -62,6 +80,7 @@ http://localhost:3000/weather/izmir
 http://localhost:3000/test/anyCommand?anyParam=anyValue&anyOptionalParam&format=text
 ```
 
+
 ### Modules
 
 - Salyangoz (http://salyangoz.me)
@@ -69,3 +88,33 @@ http://localhost:3000/test/anyCommand?anyParam=anyValue&anyOptionalParam&format=
 - Weather (http://openweathermap.org)
 - Def
 - Speech
+
+
+### Requirements
+
+* node.js (https://nodejs.org/)
+
+
+## License
+
+MIT, for further details, please see [LICENSE](LICENSE) file.
+
+
+## Contributing
+
+See [contributors.md](contributors.md)
+
+It is publicly open for any contribution. Bugfixes, new features and extra modules are welcome.
+
+* To contribute to code: Fork the repo, push your changes to your fork, and submit a pull request.
+* To report a bug: If something does not work, please report it using GitHub issues.
+* To support: [![Donate](https://img.shields.io/gratipay/eserozvataf.svg)](https://gratipay.com/eserozvataf/)
+
+
+[npm-image]: https://img.shields.io/npm/v/apibone.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/apibone
+[download-image]: https://img.shields.io/npm/dt/apibone.svg?style=flat-square
+[dep-image]: https://img.shields.io/david/eserozvataf/apibone.svg?style=flat-square
+[dep-url]: https://github.com/eserozvataf/apibone
+[license-image]: https://img.shields.io/npm/l/apibone.svg?style=flat-square
+[license-url]: https://github.com/eserozvataf/apibone/blob/master/LICENSE
