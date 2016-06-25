@@ -1,7 +1,7 @@
 {
   "name": "apibone",
-  "version": "0.0.22",
-  "description": "A tiny backbone that provides platform-agnostic environment for its modules.",
+  "version": "0.0.23",
+  "description": "An unified platform for queryable services.",
   "keywords": [
     "api"
   ],
