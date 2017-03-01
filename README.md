@@ -87,6 +87,12 @@ $ node ./lib/telegrambot.js
 ```
 
 
+### Start as a Slack Bot
+```sh
+$ node ./lib/slackbot.js
+```
+
+
 ### Modules
 
 - Salyangoz (http://salyangoz.me)
