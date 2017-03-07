@@ -23,10 +23,15 @@ updateNotifier({ pkg: pkg })
 
 const apiBone = new ApiBone(CliPlatform);
 
-const args = process.argv.slice(2);
+const args = process.argv.slice(2).join(' ');
 
 if (args.length > 0) {
-    apiBone.execute({ args: args })
+    apiBone.execute({
+        input: {
+            type: 'command',
+            text: args
+        }
+    })
         .catch((ex) => {
             console.error(ex);
         });

@@ -1,5 +1,4 @@
 module.exports = {
-    defaultCommand: 'def',
     aliases: {
         'bot': 'def bot'
     },
