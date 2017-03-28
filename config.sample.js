@@ -1,6 +1,4 @@
 module.exports = {
-    aliases: {
-    },
     telegram: {
         botToken: ''
     },
