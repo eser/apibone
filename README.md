@@ -5,7 +5,7 @@
 [![dependencies][dep-image]][dep-url]
 [![license][license-image]][license-url]
 
-[apibone](https://github.com/eserozvataf/apibone) is an unified platform for queryable services. It simply provides environment-agnostic interfaces/objects for its modules.
+[apibone](https://github.com/eserozvataf/apibone) is a library which provides some interfaces for queryable services. It simply abstracts request and response objects for its defined functions.
 
 apibone modules query various web services and return responses in requested formatting. Whether the platform is cli or web, modules access same interface for input and output objects.
 
@@ -49,8 +49,6 @@ $ apibone module [arguments]
 
 # Examples:
 $ apibone modules
-$ apibone salyangoz --limit 2
-$ apibone salyangoz --limit 2 --format json
 $ apibone rates usd try
 $ apibone rates usd try --amount 5
 $ apibone weather izmir
@@ -74,7 +72,6 @@ $ npm start
 
 # Example:
 http://localhost:3000/modules
-http://localhost:3000/salyangoz?limit=2
 http://localhost:3000/rates/usd/try?amount=5
 http://localhost:3000/weather/izmir
 http://localhost:3000/test/anyCommand?anyParam=anyValue&anyOptionalParam&format=text
