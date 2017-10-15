@@ -39,7 +39,7 @@
     "haller": "^0.1.1",
     "node-emoji": "^1.8.1",
     "node-fetch": "^1.7.3",
-    "node-telegram-bot": "^0.1.9",
+    "node-telegram-bot-api": "^0.28.0",
     "slackbots": "^1.1.0",
     "tmp": "^0.0.33",
     "update-notifier": "^2.3.0",
