@@ -5,6 +5,8 @@
 [![dependencies][dep-image]][dep-url]
 [![license][license-image]][license-url]
 
+**DEPRECATED: in favor of [hex-functions](https://github.com/eserozvataf/hex-functions).**
+
 [apibone](https://github.com/eserozvataf/apibone) is a library which provides some interfaces for queryable services. It simply abstracts request and response objects for its defined functions.
 
 apibone modules query various web services and return responses in requested formatting. Whether the platform is cli or web, modules access same interface for input and output objects.
@@ -116,8 +118,13 @@ See [contributors.md](contributors.md)
 It is publicly open for any contribution. Bugfixes, new features and extra modules are welcome.
 
 * To contribute to code: Fork the repo, push your changes to your fork, and submit a pull request.
-* To report a bug: If something does not work, please report it using GitHub issues.
-* To support: [![Donate](https://img.shields.io/gratipay/eserozvataf.svg)](https://gratipay.com/eserozvataf/)
+* To report a bug: If something does not work, please report it using [GitHub Issues](https://github.com/eserozvataf/apibone/issues).
+
+
+## To Support
+
+[Visit my patreon profile at patreon.com/eserozvataf](https://www.patreon.com/eserozvataf)
+
 
 
 [npm-image]: https://img.shields.io/npm/v/apibone.svg?style=flat-square
