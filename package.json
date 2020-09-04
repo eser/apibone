@@ -43,7 +43,7 @@
     "slackbots": "^1.1.0",
     "tmp": "^0.0.33",
     "update-notifier": "^2.3.0",
-    "yargs-parser": "^8.0.0"
+    "yargs-parser": "^13.1.2"
   },
   "scripts": {
     "start": "node ./lib/webapp.js",
