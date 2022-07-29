@@ -5,7 +5,14 @@
 [![dependencies][dep-image]][dep-url]
 [![license][license-image]][license-url]
 
-**DEPRECATED: in favor of [hex-functions](https://github.com/eserozvataf/hex-functions).**
+
+## Update (July 2022)
+
+DEPRECATED in favor of [hex](https://github.com/eserozvataf/hex).
+See https://github.com/eserozvataf/hex for details.
+
+
+## README
 
 [apibone](https://github.com/eserozvataf/apibone) is a library which provides some interfaces for queryable services. It simply abstracts request and response objects for its defined functions.
 
